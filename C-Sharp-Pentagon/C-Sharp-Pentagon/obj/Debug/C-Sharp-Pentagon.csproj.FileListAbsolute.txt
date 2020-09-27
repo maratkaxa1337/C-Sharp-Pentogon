@@ -22,3 +22,5 @@ C:\Users\My PC\Documents\Мои программы\C-Sharp-Pentagon\C-Sharp-Pent
 C:\Users\My PC\Documents\Мои программы\C-Sharp-Pentagon\C-Sharp-Pentagon\bin\Debug\ru\EntityFramework.resources.dll
 C:\Users\My PC\Documents\Мои программы\C-Sharp-Pentagon\C-Sharp-Pentagon\obj\Debug\C-Sharp-Pentagon_Content.g.cs
 C:\Users\My PC\Documents\Мои программы\C-Sharp-Pentagon\C-Sharp-Pentagon\obj\Debug\C-Sharp-Pentagon.csproj.CopyComplete
+C:\Users\My PC\Documents\Мои программы\C-Sharp-Pentagon\C-Sharp-Pentagon\obj\Debug\Views\Pages\AdminPages\CreateUserPage.g.cs
+C:\Users\My PC\Documents\Мои программы\C-Sharp-Pentagon\C-Sharp-Pentagon\obj\Debug\Views\Pages\AdminPages\CreateUserPage.baml
