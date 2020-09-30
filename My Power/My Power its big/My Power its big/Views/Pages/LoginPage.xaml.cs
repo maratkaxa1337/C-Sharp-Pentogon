@@ -24,5 +24,10 @@ namespace My_Power_its_big.Views.Pages
         {
             InitializeComponent();
         }
+
+        private void buttonLogin_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

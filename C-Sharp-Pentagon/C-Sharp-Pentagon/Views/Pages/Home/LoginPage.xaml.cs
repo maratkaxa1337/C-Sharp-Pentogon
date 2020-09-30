@@ -1,5 +1,6 @@
 ﻿using C_Sharp_Pentagon.Context;
 using C_Sharp_Pentagon.Views.Pages.AdminPages;
+using C_Sharp_Pentagon.Views.Pages.ViewDataPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +44,7 @@ namespace C_Sharp_Pentagon.Views.Pages.Home
                     {
                         case "A":
                             MessageBox.Show("Привет Администратор " + currentUser.Username);
-                            NavigationService.Navigate(new CreateUserPage());
+                            NavigationService.Navigate(new ViewDataPage());
                             break;
                         case "U":
                             MessageBox.Show("Привет Пользователь " + currentUser.Username);

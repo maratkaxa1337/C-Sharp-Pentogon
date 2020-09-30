@@ -116,6 +116,12 @@ namespace My_Power_its_big.Views.Pages {
             return;
             case 4:
             this.buttonLogin = ((System.Windows.Controls.Button)(target));
+            
+            #line 52 "..\..\..\..\Views\Pages\LoginPage.xaml"
+            this.buttonLogin.Click += new System.Windows.RoutedEventHandler(this.buttonLogin_Click);
+            
+            #line default
+            #line hidden
             return;
             }
             this._contentLoaded = true;
