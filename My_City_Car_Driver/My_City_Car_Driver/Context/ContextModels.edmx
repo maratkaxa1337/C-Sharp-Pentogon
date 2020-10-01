@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbServisModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Computer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CPU" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="GPU" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PowerSupply" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RAM" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Motherboard" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Housing" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CoutryManufacture">
+          <Key>
+            <PropertyRef Name="CoutryID" />
+          </Key>
+          <Property Name="CoutryID" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDComputer" Type="int" Nullable="false" />
+          <Property Name="IDCoutryManufacture" Type="nchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Signin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IDRole" Type="nchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Product_IDComputer_Computer_ID">
+          <End Role="Computer" Type="Self.Computer" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDComputer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_IDCountryManufacture_CoutryManufacture_CoutryID">
+          <End Role="CoutryManufacture" Type="Self.CoutryManufacture" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoutryManufacture">
+              <PropertyRef Name="CoutryID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDCoutryManufacture" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Signin_IDRole_Role_RoleID">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Signin" Type="Self.Signin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Signin">
+              <PropertyRef Name="IDRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbServisModelStoreContainer">
+          <EntitySet Name="Computer" EntityType="Self.Computer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoutryManufacture" EntityType="Self.CoutryManufacture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Signin" EntityType="Self.Signin" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Product_IDComputer_Computer_ID" Association="Self.FK_Product_IDComputer_Computer_ID">
+            <End Role="Computer" EntitySet="Computer" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_IDCountryManufacture_CoutryManufacture_CoutryID" Association="Self.FK_Product_IDCountryManufacture_CoutryManufacture_CoutryID">
+            <End Role="CoutryManufacture" EntitySet="CoutryManufacture" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Signin_IDRole_Role_RoleID" Association="Self.FK_Signin_IDRole_Role_RoleID">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Signin" EntitySet="Signin" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbServisModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Computer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CPU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GPU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PowerSupply" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RAM" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Motherboard" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Housing" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_IDComputer_Computer_ID" FromRole="Computer" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="CoutryManufacture">
+          <Key>
+            <PropertyRef Name="CoutryID" />
+          </Key>
+          <Property Name="CoutryID" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_IDCountryManufacture_CoutryManufacture_CoutryID" FromRole="CoutryManufacture" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDComputer" Type="Int32" Nullable="false" />
+          <Property Name="IDCoutryManufacture" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Computer" Relationship="Self.FK_Product_IDComputer_Computer_ID" FromRole="Product" ToRole="Computer" />
+          <NavigationProperty Name="CoutryManufacture" Relationship="Self.FK_Product_IDCountryManufacture_CoutryManufacture_CoutryID" FromRole="Product" ToRole="CoutryManufacture" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Signin" Relationship="Self.FK_Signin_IDRole_Role_RoleID" FromRole="Role" ToRole="Signin" />
+        </EntityType>
+        <EntityType Name="Signin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IDRole" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Signin_IDRole_Role_RoleID" FromRole="Signin" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_Product_IDComputer_Computer_ID">
+          <End Role="Computer" Type="Self.Computer" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Computer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDComputer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_IDCountryManufacture_CoutryManufacture_CoutryID">
+          <End Role="CoutryManufacture" Type="Self.CoutryManufacture" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoutryManufacture">
+              <PropertyRef Name="CoutryID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDCoutryManufacture" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Signin_IDRole_Role_RoleID">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Signin" Type="Self.Signin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Signin">
+              <PropertyRef Name="IDRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbServisEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Computer" EntityType="Self.Computer" />
+          <EntitySet Name="CoutryManufacture" EntityType="Self.CoutryManufacture" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Signin" EntityType="Self.Signin" />
+          <AssociationSet Name="FK_Product_IDComputer_Computer_ID" Association="Self.FK_Product_IDComputer_Computer_ID">
+            <End Role="Computer" EntitySet="Computer" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_IDCountryManufacture_CoutryManufacture_CoutryID" Association="Self.FK_Product_IDCountryManufacture_CoutryManufacture_CoutryID">
+            <End Role="CoutryManufacture" EntitySet="CoutryManufacture" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Signin_IDRole_Role_RoleID" Association="Self.FK_Signin_IDRole_Role_RoleID">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Signin" EntitySet="Signin" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbServisModelStoreContainer" CdmEntityContainer="dbServisEntities">
+          <EntitySetMapping Name="Computer">
+            <EntityTypeMapping TypeName="dbServisModel.Computer">
+              <MappingFragment StoreEntitySet="Computer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CPU" ColumnName="CPU" />
+                <ScalarProperty Name="GPU" ColumnName="GPU" />
+                <ScalarProperty Name="PowerSupply" ColumnName="PowerSupply" />
+                <ScalarProperty Name="RAM" ColumnName="RAM" />
+                <ScalarProperty Name="Motherboard" ColumnName="Motherboard" />
+                <ScalarProperty Name="Housing" ColumnName="Housing" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoutryManufacture">
+            <EntityTypeMapping TypeName="dbServisModel.CoutryManufacture">
+              <MappingFragment StoreEntitySet="CoutryManufacture">
+                <ScalarProperty Name="CoutryID" ColumnName="CoutryID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="dbServisModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDComputer" ColumnName="IDComputer" />
+                <ScalarProperty Name="IDCoutryManufacture" ColumnName="IDCoutryManufacture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="dbServisModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Signin">
+            <EntityTypeMapping TypeName="dbServisModel.Signin">
+              <MappingFragment StoreEntitySet="Signin">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IDRole" ColumnName="IDRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
